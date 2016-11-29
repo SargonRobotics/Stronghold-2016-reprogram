@@ -47,6 +47,9 @@ public class Robot extends IterativeRobot
 	
 	//Camera
     USBCamera camera;
+    
+    //GRIP
+    //private NetworkTable grip;
 
     public void robotInit()
     { 
@@ -65,6 +68,25 @@ public class Robot extends IterativeRobot
         
         camera = new USBCamera("cam0");
         CameraServer.getInstance().startAutomaticCapture(camera);
+        
+/*        //GRIP Code
+        double defaultVal[] = new double[0];
+        
+        grip = NetworkTable.getTable("GRIP/target");
+        
+        while(true)
+        {
+        	double[] areas = grip.getNumberArray("area", defaultVal);
+        	System.out.println("Areas: ");
+        	
+        	for(double area : areas)
+        	{
+        		System.out.println(area + " ");
+        	}
+        	
+        	System.out.println();
+        	Timer.delay(1);
+        } */
     }
 	
     public void disabledInit() { }
