@@ -1,21 +1,20 @@
 package org.usfirst.frc.team2335.robot;
 
+import java.io.IOException;
+
 import org.usfirst.frc.team2335.robot.commands.AutoShort;
 import org.usfirst.frc.team2335.robot.subsystems.Arm;
 import org.usfirst.frc.team2335.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2335.robot.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.vision.USBCamera;
 
 public class Robot extends IterativeRobot
 {
@@ -48,11 +47,9 @@ public class Robot extends IterativeRobot
 	public static OI oi;
 	
 	//Camera
-    USBCamera camera;
-    
-    //GRIP
-    private NetworkTable grip;
-
+    //USBCamera camera;
+	
+	@Override
     public void robotInit()
     { 
     	//Defines subsystems
@@ -68,27 +65,8 @@ public class Robot extends IterativeRobot
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         
-        camera = new USBCamera("cam0");
-        CameraServer.getInstance().startAutomaticCapture(camera);
-        
-        //GRIP Code
-        double defaultVal[] = new double[0];
-        
-        grip = NetworkTable.getTable("GRIP/target");
-        
-        while(true)
-        {
-        	double[] areas = grip.getNumberArray("area", defaultVal);
-        	System.out.println("Areas: ");
-        	
-        	for(double area : areas)
-        	{
-        		System.out.println(area + " ");
-        	}
-        	
-        	System.out.println();
-        	Timer.delay(1);
-        }
+        //camera = new USBCamera("cam0");
+        //CameraServer.getInstance().startAutomaticCapture(camera);
     }
 	
     public void disabledInit() { }
@@ -122,7 +100,7 @@ public class Robot extends IterativeRobot
 			autonomousCommand = new ExampleCommand();
 			break;
 		} */
-        
+                
        if(SmartDashboard.getBoolean("DB/Button 0", true))
         {
         	DriverStation.reportWarning("Starting autonomous", true);
@@ -133,6 +111,7 @@ public class Robot extends IterativeRobot
         if (autoCommand != null) autoCommand.start();
     }
     
+    @Override
     public void autonomousPeriodic()
     {
         Scheduler.getInstance().run();
