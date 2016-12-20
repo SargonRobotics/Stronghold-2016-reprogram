@@ -26,12 +26,14 @@ public class DriveTrain extends Subsystem
 	
 	public void arcade(double moveAmount, double rotateAmount)
 	{
+		//arcadeDrive method moves the drive motors
 		drive.arcadeDrive(moveAmount, rotateAmount);
 		SmartDashboard.putString("DB/String 0", Double.toString(moveAmount));
 		SmartDashboard.putString("DB/String 1", Double.toString(rotateAmount));
 	}
 	
-	public void driveForward() //For auto
+	//Gradually increases speed for auto commands
+	public void driveForward()
 	{
 		drive.arcadeDrive(speed, 0);
 		

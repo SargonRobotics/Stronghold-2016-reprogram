@@ -6,10 +6,12 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class PullBall extends Command
 {
-
     public PullBall()
     {
+    	//Uses shooter subsystem
         requires(Robot.shooter);
+        
+        //Sets the command to run for 5 seconds
         setTimeout(0.5);
     }
 
@@ -22,6 +24,7 @@ public class PullBall extends Command
 
     protected boolean isFinished()
     {
+    	//After the timeout (0.5 seconds) it runs end()
         return isTimedOut();
     }
 
@@ -30,6 +33,8 @@ public class PullBall extends Command
     	Robot.shooter.stopBall();
     }
 
+    //This is called when the command is interrupted (duh)
+    //So incase something crashes it still stops the drive train
     protected void interrupted()
     {
     	end();

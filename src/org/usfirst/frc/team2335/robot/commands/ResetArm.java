@@ -8,6 +8,7 @@ public class ResetArm extends Command
 {
     public ResetArm()
     {
+    	//Uses arm subsystem
         requires(Robot.arm);
     }
 
@@ -20,6 +21,7 @@ public class ResetArm extends Command
 
     protected boolean isFinished()
     {
+    	//If the encoder value shows the arm is at max height, then it stops the motor
         return Robot.arm.encoderAt0();
     }
 
@@ -28,6 +30,8 @@ public class ResetArm extends Command
     	Robot.arm.stop();
     }
 
+    //This is called when the command is interrupted (duh)
+    //So incase something crashes it still stops the drive train
     protected void interrupted()
     {
     	end();

@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveShooter extends Command
 {
-
     public MoveShooter()
     {
+    	//Uses shooter subsystem
         requires(Robot.shooter);
     }
 
@@ -21,6 +21,7 @@ public class MoveShooter extends Command
 
     protected boolean isFinished()
     {
+    	//The return false means that once the axis stops being active it will run end()
         return false;
     }
 
@@ -29,6 +30,8 @@ public class MoveShooter extends Command
     	Robot.shooter.stopShooter();
     }
 
+    //This is called when the command is interrupted (duh)
+    //So incase something crashes it still stops the drive train
     protected void interrupted() 
     {
     	end();

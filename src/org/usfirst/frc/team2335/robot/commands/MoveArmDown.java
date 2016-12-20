@@ -4,13 +4,12 @@ import org.usfirst.frc.team2335.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class MoveArmDown extends Command {
-
-    public MoveArmDown() {
-        requires(Robot.arm);
+public class MoveArmDown extends Command
+{
+    public MoveArmDown()
+    {
+    	//Uses arm subsystem
+    	requires(Robot.arm);
     }
 
     protected void initialize() { }
@@ -22,6 +21,7 @@ public class MoveArmDown extends Command {
 
     protected boolean isFinished()
     {
+    	//The return false means that once the axis stops being active it will run end()
         return false;
     }
 
@@ -30,8 +30,8 @@ public class MoveArmDown extends Command {
     	Robot.arm.stop();
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    //This is called when the command is interrupted (duh)
+    //So incase something crashes it still stops the drive train
     protected void interrupted()
     {
     	Robot.arm.stop();

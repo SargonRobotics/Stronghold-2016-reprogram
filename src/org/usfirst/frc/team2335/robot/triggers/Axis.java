@@ -8,16 +8,16 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 public class Axis extends Trigger
 {
 	//Constants
-	public static double DEADZONE = 0.2;
+	public static final double DEADZONE = 0.2;
 	
 	//Axes
-	public static int MOVE = 1, ROTATE = 0;
+	public static final int MOVE = 1, ROTATE = 0;
 	
 	//Motors
-	public static int LEFTDRIVE = 1, RIGHTDRIVE = 0, ARM = 8;
+	public static final int LEFTDRIVE = 1, RIGHTDRIVE = 0, ARM = 8;
 	
 	//Buttons
-	public static int ARMDOWN = 4, ARMUP = 6;
+	public static final int ARMDOWN = 4, ARMUP = 6;
 
 	
     //Variables to store joystick, and button values
@@ -31,6 +31,9 @@ public class Axis extends Trigger
 		_axis = axis;
 	}
 	
+	//If the controller value isn't at 0, then it's seen as active
+	//In the OI file it uses .whenActive() or .whileActive()
+	//That means that command will run either once or while this get method is returning true
     public boolean get()
     {
     	if(Robot.deadzone(_xbox.getRawAxis(_axis), 1) > 0 || Robot.deadzone(_xbox.getRawAxis(_axis), 1) < 0)

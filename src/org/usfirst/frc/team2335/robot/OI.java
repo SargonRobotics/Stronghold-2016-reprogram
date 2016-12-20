@@ -48,6 +48,7 @@ public class OI {
 		reset.whenPressed(new Reset());
 	}
 	
+	//Gets the joystick value for other commands to use
 	public double getAxis(int axis, double max)
 	{
 		return Robot.deadzone(xbox.getRawAxis(axis), max);

@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveArmUp extends Command
 {
-
     public MoveArmUp()
     {
+    	//Uses arm subsystem
         requires(Robot.arm);
     }
 
@@ -21,6 +21,7 @@ public class MoveArmUp extends Command
 
     protected boolean isFinished()
     {
+    	//The return false means that once the axis stops being active it will run end()
         return false;
     }
 
@@ -29,8 +30,8 @@ public class MoveArmUp extends Command
     	Robot.arm.stop();
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    //This is called when the command is interrupted (duh)
+    //So incase something crashes it still stops the drive train
     protected void interrupted()
     {
     	Robot.arm.stop();

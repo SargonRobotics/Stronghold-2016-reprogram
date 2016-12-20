@@ -6,7 +6,8 @@ public class Reset extends CommandGroup
 {    
     public Reset()
     {
-        addParallel(new ResetArm()); //Resets the arm
+    	//Runs ResetArm and ResetShooter at the same time (or in parallel)
+        addParallel(new ResetArm());
         addParallel(new ResetShooter());
     }
 }

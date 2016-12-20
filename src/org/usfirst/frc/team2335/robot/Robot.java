@@ -59,8 +59,6 @@ public class Robot extends IterativeRobot
 		oi = new OI();
 		
         chooser = new SendableChooser();
-//        chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         
         camera = new USBCamera("cam0");
@@ -73,33 +71,13 @@ public class Robot extends IterativeRobot
 	{
 		Scheduler.getInstance().run();
 	}
-
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
-	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
-	 * Dashboard, remove all of the chooser code and uncomment the getString code to get the auto name from the text box
-	 * below the Gyro
-	 *
-	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
-	 * or additional comparisons to the switch structure below with additional strings & commands.
-	 */
 	
     public void autonomousInit()
     {
         autoCommand = (Command) chooser.getSelected();
         
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
-        
-       if(SmartDashboard.getBoolean("DB/Button 0", true))
+        //If the first LED on the dashboard then the short auto command will run
+        if(SmartDashboard.getBoolean("DB/Button 0", true))
         {
         	DriverStation.reportWarning("Starting autonomous", true);
         	autoCommand = new AutoShort();
@@ -132,9 +110,12 @@ public class Robot extends IterativeRobot
     
     public static double deadzone(double amount, double max) //Creates a deadzone for the axes of the controller
 	{
+    	//If the value from the controller is less than the deadzone value then it zeros out
+    	//If not it subtracts the deadzone from the controller value
 		amount = -(Math.abs(amount) <= Robot.DEADZONE ? 0 :
 			(amount = (amount < 0) ? (amount += Robot.DEADZONE) : (amount -= Robot.DEADZONE)));
 		
+		//Multiplies the controller value by the slope made from (y2 - y1) / (x2 - x1)
 		return ((max - 0) / ((1 - Robot.DEADZONE) - 0) * (amount - 0)) - 0.1;
 	}
 }

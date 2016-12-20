@@ -8,6 +8,7 @@ public class Drive extends Command
 {	
     public Drive()
     {
+    	//Uses the driveTrain subsystem
         requires(Robot.driveTrain);
     }
 
@@ -15,13 +16,13 @@ public class Drive extends Command
 
     protected void execute()
     {
-    	Robot.driveTrain.arcade(
-    			Robot.oi.getAxis(Robot.MOVE, 0.95),
-    			Robot.oi.getAxis(Robot.ROTATE, 0.75));
+    	//Gets joystick values from OI file and uses arcadeDrive to drive the robot
+    	Robot.driveTrain.arcade(Robot.oi.getAxis(Robot.MOVE, 0.95), Robot.oi.getAxis(Robot.ROTATE, 0.75));
     }
 
     protected boolean isFinished()
     {
+    	//The return false means that once the axis stops being active it will run end()
         return false;
     }
 
@@ -30,5 +31,10 @@ public class Drive extends Command
     	Robot.driveTrain.stop();
     }
 
-    protected void interrupted() { }
+    //This is called when the command is interrupted (duh)
+    //So incase something crashes it still stops the drive train
+    protected void interrupted()
+    {
+    	end();
+    }
 }

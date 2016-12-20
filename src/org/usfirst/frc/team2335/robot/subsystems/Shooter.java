@@ -31,16 +31,19 @@ public class Shooter extends Subsystem
 	{
 		super();
 		
+		//Motors
 		leftShoot = new Victor(Robot.LEFTSHOOT);
 		rightShoot = new Victor(Robot.RIGHTSHOOT);
 		shooterAim = new Victor(Robot.MOVESHOOTER);
 		
+		//Servo
 		shootServo = new Servo(Robot.SHOOTSERVO);
 		
-    	shooterLimit = new DigitalInput(Robot.SHOOTLIMIT);
+		//Digial inputs
     	shooterChannelA = new DigitalInput(Robot.SHOOTERCHANNELA);
     	shooterChannelB = new DigitalInput(Robot.SHOOTERCHANNELB);
 		
+    	//Encoder
 		shootEncoder = new Encoder(shooterChannelA, shooterChannelB, true, EncodingType.k4X);
 	}
 	
@@ -77,11 +80,13 @@ public class Shooter extends Subsystem
 	//Shooter move commands
 	public void moveShooter(double value)
 	{
-		if(shootEncoder.get() <= 20 && value > 0)
+		//If the shooter is trying to be moved up and the shooter isn't at max value, print a warning
+		if(encoderAt0() && value > 0)
 		{
 			stopShooter();
 			DriverStation.reportWarning("Can't move shooter up more", true);
 		}
+		//If not then move the shooter
 		else
 		{
 			shooterAim.set(value);

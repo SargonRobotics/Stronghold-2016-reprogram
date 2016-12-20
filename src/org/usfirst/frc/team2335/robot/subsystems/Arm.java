@@ -23,6 +23,8 @@ public class Arm extends Subsystem
     
     public Arm()
     {
+    	super();
+    	
     	//Defines motor
         armMotor = new Victor(Robot.ARM);
         
@@ -46,6 +48,7 @@ public class Arm extends Subsystem
     
     public void initDefaultCommand() { }
     
+    //Arm motor commands
     public void down()
     {
     	armMotor.set(0.8);    	
@@ -54,7 +57,8 @@ public class Arm extends Subsystem
     
     public void up()
     {
-    	if(armEncoder.get() >= -5)
+    	//If the arm isn't at max height, it moves up
+    	if(encoderAt0())
     	{
     		stop();
     		DriverStation.reportWarning("Can't move arm up", true);
@@ -72,6 +76,7 @@ public class Arm extends Subsystem
     	armMotor.set(0);
     }
     
+    //Encoder commands
     public boolean encoderAt0()
     {
     	if(armEncoder.get() >= -5)
@@ -86,7 +91,7 @@ public class Arm extends Subsystem
 
     private void printEncoder()
     {
-    	//Prints to dash
+    	//Prints to the dashboard
     	SmartDashboard.putString("DB/String 4", "eArm: " + Integer.toString(armEncoder.get()));
     }
 }
