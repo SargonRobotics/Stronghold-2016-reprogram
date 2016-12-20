@@ -135,6 +135,6 @@ public class Robot extends IterativeRobot
 		amount = -(Math.abs(amount) <= Robot.DEADZONE ? 0 :
 			(amount = (amount < 0) ? (amount += Robot.DEADZONE) : (amount -= Robot.DEADZONE)));
 		
-		return ((max - 0) / ((1 - Robot.DEADZONE) - 0) * (amount - 0));
+		return ((max - 0) / ((1 - Robot.DEADZONE) - 0) * (amount - 0)) - 0.1;
 	}
 }
