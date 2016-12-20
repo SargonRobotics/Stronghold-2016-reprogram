@@ -90,7 +90,7 @@ public class Shooter extends Subsystem
 		else
 		{
 			shooterAim.set(value);
-			SmartDashboard.putString("DB/String 2", "Shooter: " + Double.toString(value));
+			SmartDashboard.putString("DB/String 2", Double.toString(value));
 		} 
 		
 		printEncoder();
@@ -99,6 +99,7 @@ public class Shooter extends Subsystem
 	public void stopShooter()
 	{
 		shooterAim.set(0);
+		SmartDashboard.putString("DB/String 2", "0");
 	}
 	
 	//Encoder commands

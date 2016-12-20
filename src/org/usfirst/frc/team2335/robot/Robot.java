@@ -112,10 +112,9 @@ public class Robot extends IterativeRobot
 	{
     	//If the value from the controller is less than the deadzone value then it zeros out
     	//If not it subtracts the deadzone from the controller value
-		amount = -(Math.abs(amount) <= Robot.DEADZONE ? 0 :
-			(amount = (amount < 0) ? (amount += Robot.DEADZONE) : (amount -= Robot.DEADZONE)));
+		amount = -(Math.abs(amount) <= Robot.DEADZONE ? 0 : (amount = (amount < 0) ? amount : amount));
 		
 		//Multiplies the controller value by the slope made from (y2 - y1) / (x2 - x1)
-		return ((max - 0) / ((1 - Robot.DEADZONE) - 0) * (amount - 0)) - 0.1;
+		return ((max - 0) / ((1 - Robot.DEADZONE) - 0) * (amount - 0));
 	}
 }

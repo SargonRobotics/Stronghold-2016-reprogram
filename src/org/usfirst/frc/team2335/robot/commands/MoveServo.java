@@ -11,8 +11,8 @@ public class MoveServo extends Command
     	//Uses shooter subsystem
         requires(Robot.shooter);
         
-        //Sets the timeout to 0.4 seconds
-        setTimeout(0.4);
+        //Sets the timeout to 1 second
+        setTimeout(1);
     }
 
     protected void initialize() { }
@@ -24,7 +24,7 @@ public class MoveServo extends Command
 
     protected boolean isFinished()
     {
-    	//After the timeout (0.4 seconds) it runs end()
+    	//After the timeout (1 second) it runs end()
         return isTimedOut();
     }
 
